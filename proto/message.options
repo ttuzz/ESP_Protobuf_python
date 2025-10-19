@@ -1,0 +1,5 @@
+# Nanopb options: set a fixed maximum for repeated fields to generate
+# fixed-size arrays (avoids callback types). Adjust max_count as needed.
+
+# For SensorArray.readings, allow up to 4 readings
+SensorArray.readings max_count: 4

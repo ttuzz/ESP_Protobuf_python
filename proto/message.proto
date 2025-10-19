@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+// A single sensor reading (id identifies the sensor)
+message SensorReading {
+  int32 id = 1;
+  float temperature = 2;
+  float humidity = 3;
+}
+
+// Container for multiple sensor readings
+message SensorArray {
+  repeated SensorReading readings = 1;
+}
