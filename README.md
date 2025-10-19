@@ -1,4 +1,4 @@
-![preview](assets/preview.gif)
+![demo](assets/preview.gif)
 
 # ESP8266 Protobuf Serial Communication
 
