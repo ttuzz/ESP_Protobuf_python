@@ -1,25 +1,25 @@
 ![preview](assets/preview.gif)
 
-# ESP8266 Protobuf Seri Haberleşme
+# ESP8266 Protobuf Serial Communication
 
-Kısa tanım
-- Bu proje, bir PyQt5 GUI ile ESP8266 (PlatformIO + Arduino) arasındaki Protobuf tabanlı seri iletişimi gösterir. Mesajlar Nanopb ile ESP tarafında kodlanır/çözülür ve basit bir çerçeve (0xAA 0x55 + 16-bit uzunluk + payload) kullanılır.
+## Overview
+- This project demonstrates Protobuf-based serial communication between a PyQt5 GUI and ESP8266 (PlatformIO + Arduino). Messages are encoded/decoded on the ESP side using Nanopb, with a simple frame format (0xAA 0x55 + 16-bit length + payload).
 
-Ne işe yarar
-- GUI (PC) kısmi güncellemeler gönderir (ör. sensör sıcaklığı). ESP gelen veriyi kendi `device_state` nesnesine birleştirir/üst yazar ve hem anında cevap hem de periyodik durum mesajları yollar. Bu sayede GUI her zaman son durumu alır.
+## How it works
+- The GUI (PC) sends partial updates (e.g., sensor temperature). The ESP merges/overwrites incoming data into its own `device_state` object and sends both immediate responses and periodic status messages. This ensures the GUI always receives the latest state.
 
-Hızlı kullanım
-1. `assets/preview.gif` dosyasını proje kökünde `assets` adlı bir klasör oluşturarak koyun. GIF otomatik olarak README başında gösterilecektir.
-2. Seri port ayarını `platformio.ini` içindeki `upload_port` ve `monitor_speed` (varsayılan: COM6, 115200) ile kontrol edin.
-3. Python GUI için:
-   - `py_scripts/gui.py` dosyasını çalıştırın (gerekiyorsa önce sanal ortamda `pip install -r requirements.txt` veya `pip install pyqt5 protobuf pyserial`).
-4. Firmware için:
-   - PlatformIO ile derleyip ESP'ye yükleyin: proje kökünde `platformio run --target upload` (VSCode PlatformIO görevlerini kullanabilirsiniz).
-5. Seri monitörde (COM6) hem çerçeveli protobuf akışını hem de debug mesajlarını (USB Serial) görebilirsiniz.
+## Quick Start
+1. Place the `assets/preview.gif` file in an `assets` folder at the project root. The GIF will be automatically displayed at the top of the README.
+2. Check serial port settings in `platformio.ini` with `upload_port` and `monitor_speed` (default: COM6, 115200).
+3. For Python GUI:
+   - Run `py_scripts/gui.py` (install dependencies first if needed: `pip install -r requirements.txt` or `pip install pyqt5 protobuf pyserial` in a virtual environment).
+4. For Firmware:
+   - Compile and upload to ESP using PlatformIO: `platformio run --target upload` from project root (you can also use VSCode PlatformIO tasks).
+5. In the serial monitor (COM6), you can see both framed protobuf stream and debug messages (USB Serial).
 
-Notlar
-- Eğer `assets/preview.gif` yoksa README başında boş bir resim bağlantısı görünebilir; GIF'i `assets/preview.gif` olarak ekleyin veya dosya yolunu README içinde güncelleyin.
-- `proto` dosyaları ve nanopb üretimi `py_scripts/proto.bat` ile desteklenir; Windows ortamında `protoc` ve `protoc-gen-nanopb.exe` bulunmalıdır.
+## Notes
+- If `assets/preview.gif` doesn't exist, you may see an empty image link at the top of the README; add the GIF as `assets/preview.gif` or update the file path in the README.
+- `proto` files and nanopb generation are supported via `py_scripts/proto.bat`; `protoc` and `protoc-gen-nanopb.exe` should be available in Windows environment.
 
-İletişim
-- Daha fazla yardım isterseniz, seri çıktılarından ilgili log satırlarını kopyalayıp gönderin; decode/merge adımlarına göre yardımcı olurum.
+## Support
+- If you need more help, copy and send relevant log lines from serial output; I can help with decode/merge steps.
